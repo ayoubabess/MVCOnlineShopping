@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MVConlineshopping.Models.Marque>
+
+@{
+    ViewBag.Title = "Index";
+   // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-10 col-md-offset-2">
+    <h2>Marques</h2>
+
+    <p>
+        @Html.ActionLink("ajouter une marque", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Modifier", "Edit", new { id = item.MarqueID }) |
+
+                    @Html.ActionLink("Supprimer", "Delete", new { id = item.MarqueID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

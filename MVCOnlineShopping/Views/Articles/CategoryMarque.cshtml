@@ -1,0 +1,18 @@
+﻿
+@using MVConlineshopping.Models
+
+<div class="list-group" id="list-tab" role="tablist">
+    <a href="#" class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" role="tab" aria-controls="home">Home</a>
+    @foreach (var item in ViewData["alcategories"] as IList<Category>)
+    {
+      <a href = "#list-profile" class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"  role="tab" aria-controls="profile">@item.name</a>
+    }
+    </div>
+<div class="list-group" id="list-tab" role="tablist">
+    <a href="#" class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"  role="tab" aria-controls="home">Home</a>
+    @foreach (var item in ViewData["almarques"] as IList<Marque>)
+    {
+        <a href="#list-profile" class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" role="tab" aria-controls="profile">@item.name</a>
+    }
+</div>
+

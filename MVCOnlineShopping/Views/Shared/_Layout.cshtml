@@ -1,0 +1,253 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>@ViewBag.titre - Vente enligne</title>
+    @*@Styles.Render("~/Bootstrab/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="~/Bootstrab/css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="c~/Bootstrab/ss/slick.css" />
+    <link type="text/css" rel="stylesheet" href="~/Bootstrab/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="~/Bootstrab/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="~/Bootstrab/css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="~/Bootstrab/css/style.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <!-- TOP HEADER -->
+        <div id="top-header">
+            <div class="container">
+                <ul class="header-links pull-left">
+                    <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
+                    <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
+                    <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Sfax Tunisie</a></li>
+                </ul>
+                <ul class="header-links pull-right">
+                    
+                    <li><a href="~/login//index"><i class="fa fa-user-o"></i> Mon compte</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /TOP HEADER -->
+        <!-- MAIN HEADER -->
+        <!-- NAVIGATION -->
+    <nav id="navigation">
+        <!-- container -->
+        <div class="container">
+            <!-- responsive-nav -->
+            <div id="responsive-nav">
+                <!-- NAV -->
+                <ul class="main-nav nav navbar-nav">
+                     @if (ViewBag.titre == "Accueil")
+                     {  <li class= "active">@Html.ActionLink("Accueil", "Index", "Home")</li>
+                     }
+                     else
+                     {
+                    <li >@Html.ActionLink("Accueil", "Index", "Home")</li> }
+                  
+                   
+                    @if (ViewBag.titre == "Contact")
+                    {
+                        <li class="active">
+                            @Html.ActionLink("Contact", "SendEmail", "Login")
+                        </li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Contact", "SendEmail", "Login")</li>
+                    }
+                    @if (ViewBag.titre == "Liste des articles")
+                    {
+                        <li class="active">
+                            @Html.ActionLink("Liste des articles", "Index", "Articles")
+                        </li>
+                    }
+                    else
+                    {
+                    <li >
+                        @Html.ActionLink("Liste des articles", "Index", "Articles")
+                    </li>
+                        }
+                        @if (ViewBag.titre == "Panier")
+                        {
+                        <li class="active">
+                          @Html.ActionLink("Panier", "Myorder", "AddToCart")
+                        </li>
+                    }
+                    else
+                    {
+
+                        <li> @Html.ActionLink("Panier", "Myorder", "AddToCart")</li>
+                    }
+                   
+                </ul>
+                <!-- /NAV -->
+            </div>
+            <!-- /responsive-nav -->
+        </div>
+        <!-- /container -->
+    </nav>
+        </header>
+    <!-- /NAVIGATION -->
+    <!-- BREADCRUMB -->
+   <div class="container-fluid ">
+    <!-- row -->
+      
+
+
+                        @*<div class="row col-md-2">
+
+
+              
+                    @{Html.RenderAction("CategoryMarque", "Articles");}
+
+       </div>*@
+    <div class="row col-md-10">
+        @RenderBody()
+        </div>
+       </div>
+        <!-- FOOTER -->
+        <footer id = "footer" >
+            <!--top footer -->
+            <div class="section">
+                <!-- container -->
+                <div class="container">
+                    <!-- row -->
+                    <div class="row">
+                        <div class="col-md-3 col-xs-6">
+                            <div class="footer">
+                                <h3 class="footer-title">Retrouvez nous</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+                                <ul class="footer-links">
+                                    <li><a href = "#" ><i class="fa fa-map-marker"></i>1734 Sfax Tunisie</a></li>
+                                    <li><a href = "#" ><i class="fa fa-phone"></i>+216-95-51-84</a></li>
+                                    <li><a href = "#" ><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-xs-6">
+                            <div class="footer">
+                                <h3 class="footer-title">Categories</h3>
+                                <ul class="footer-links">
+                                    @if (ViewBag.allcategories != null)
+                                    {
+                                        foreach (var item in ViewBag.allcategories)
+                                        {
+                                            <li><a href="~/Articles/ViewByCategory?categoryName=@item.name">@item.name</a></li>
+
+                                        }
+                                    }
+                                    
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="clearfix visible-xs"></div>
+
+                        <div class="col-md-3 col-xs-6">
+                            <div class="footer">
+                                <h3 class="footer-title">Information</h3>
+                                <ul class="footer-links">
+                                    <li><a href = "#" > Promotions</a></li>
+                                    <li><a href = "#" > Meilleures ventes</a></li>
+                                    <li><a href = "#" > Contactez-nous</a></li>
+                                    <li><a href = "#" >  Service Aprés Vente</a></li>
+                                    <li><a href = "#" > Questions Fréquentes FAQ </a ></li >
+                                 
+
+                                    </ul>
+
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div class="col-md-3 col-xs-6">
+                            <div class="footer">
+                                <h3 class="footer-title">MON COMPTE</h3>
+                                <ul class="footer-links">
+                                    <li><a href="#">Mes retours de marchandise</a></li>
+                                    <li><a href = "#" > Mes commandes</a></li>
+                                    <li><a href = "#" >Mes retours de marchandise</a></li>
+                                    <li><a href = "#" >Mes informations personnelles </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / row-- >
+                </div>
+                <!-- / container-- >
+            </div>
+            <!--  top footer -->
+            <!-- bottom footer -->
+            <div id = "bottom-footer" class="section">
+                <div class="container">
+                    <!-- row -->
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <ul class="footer-payments">
+                                <li><a href = "#" ><i class="fa fa-cc-visa"></i></a></li>
+                                <li><a href = "#" ><i class="fa fa-credit-card"></i></a></li>
+                                <li><a href = "#" ><i class="fa fa-cc-paypal"></i></a></li>
+                                <li><a href = "#" ><i class="fa fa-cc-mastercard"></i></a></li>
+                                <li><a href = "#" ><i class="fa fa-cc-discover"></i></a></li>
+                                <li><a href = "#" ><i class="fa fa-cc-amex"></i></a></li>
+                            </ul>
+                            <span class="copyright">
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script><i class="fa fa-heart-o" aria-hidden="true"></i> tous droits réservés 
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </span>
+
+
+                        </div>
+                    </div>
+                    <!-- /row -->
+                </div>
+                <!-- /container -->
+            </div>
+            <!-- /bottom footer -->
+        </footer>
+        <!-- /FOOTER -->
+        <!-- jQuery Plugins -->
+
+
+   @Scripts.Render("~/Bootstrab/js/")
+    @RenderSection("scripts", required: false)
+       @* @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)*@
+</body>
+</html>

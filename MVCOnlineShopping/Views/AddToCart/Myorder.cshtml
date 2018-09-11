@@ -1,0 +1,96 @@
+﻿@model MVConlineshopping.Models.Panier 
+
+@{
+    ViewBag.Title = "Myorder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+  
+<div class="row col-md-2"></div>
+<div class="row col-md-10">
+    <h2>Mon panier</h2>
+
+  
+
+    @if (ViewBag.result == "success commande")
+    {
+    <div class="alert alert-success" role="alert">
+      cher  client votre commande est enregistré avec succes
+        nos personnel vont vous conntacter dans un delai de 2 jours
+
+    </div>
+    }
+    else if (ViewBag.result == "faillure commande")
+    {
+        <div class="alert alert-warning" role="alert">
+            echecs :operation de commander
+        </div>
+    }
+    else { 
+    <table class="table">
+        <tr>
+            <th>
+              Libellé
+            </th>
+            <th>
+              Description
+            </th>
+            <th>
+            Prix
+            </th>
+            <th>Quantité</th>
+            <th>Action</th>
+        </tr>
+       @if (Model != null)
+       {
+       foreach (var item in Model.Articlequantites)
+       {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Article.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Article.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Article.price)
+                </td>
+                <td>
+                    <a href="Subquantite/@item.Article.ArticleID">
+                        <h1 class="glyphicon glyphicon-minus">  </h1>
+                    </a>&nbsp; @Html.DisplayFor(modelItem => item.quantite) &nbsp;<a href="Addquantite/@item.Article.ArticleID"> <h1 class="glyphicon glyphicon-plus"></h1></a>
+</td>
+                <td>
+                    | @Html.ActionLink("Supprimer", "Remove", new { id = item.Article.ArticleID }) |
+                  
+                   
+                </td>
+            </tr>
+
+           }
+        <tr>
+            <td>Totale</td><td>@ViewBag.totale</td>
+        </tr>
+
+       }
+       else
+       {
+            <tr>
+        <td>
+            Panier Vide
+        </td>
+            </tr>}
+    </table>
+    <div>
+        <button type="button"
+                class="btn btn-success">
+            <a href="../Articles"> Continuer mes achats</a>
+        </button>   <button type="button"
+                            class="btn btn-warning">
+            <a href="Commander"> Commander</a>
+        </button>
+        <br />
+        <br />
+        <br />
+    </div>}
+</div>

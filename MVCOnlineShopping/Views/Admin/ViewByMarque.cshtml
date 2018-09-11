@@ -1,0 +1,206 @@
+﻿
+@using MVConlineshopping.Models
+@using PagedList.Mvc
+@model  PagedList.IPagedList<MVConlineshopping.Models.Article>
+@{
+    ViewBag.Title = "ViewByMarque";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="header">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- LOGO -->
+            <div class="col-md-3">
+                <div class="header-logo">
+                    <a href="#" class="logo">
+                        <img src="./img/logo.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <!-- /LOGO -->
+            <!-- SEARCH BAR -->
+            <div class="col-md-6">
+                <div class="header-search">
+                    <form>
+                        <select class="input-select" onclick="window.location.href=this.value;">
+
+                            <option value="~/Articles">All Categories</option>
+                            @if (Model != null)
+                            {
+                                foreach (var item in ViewBag.allcategories)
+                                {
+                                    <option value="~/Articles/ViewByCategory?categoryName=@item.name">@item.name</option>
+
+                                }
+                            }
+                        </select>
+                        <input class="input" placeholder="Search here">
+                        <button class="search-btn">Search</button>
+                    </form>
+                </div>
+            </div>
+            <!-- /SEARCH BAR -->
+            <!-- ACCOUNT -->
+            <div class="col-md-3 clearfix">
+                <div class="header-ctn">
+                    <!-- Wishlist -->
+                    <div class="dropdown" style="background-color:#D10024; border-radius:6px 6px 6px 6px">
+                        <a href="~/AddToCart/Myorder" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Votre panier</span>
+                            <div class="qty">@Session["count"]</div>
+                        </a>
+                        <div class="cart-dropdown">
+                            <div class="cart-list">
+                                <div class="product-widget">
+                                    <div class="product-img">
+                                        <img src="./img/product01.png" alt="">
+                                    </div>
+                                    <div class="product-body">
+                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                        <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+                                    </div>
+                                    <button class="delete"><i class="fa fa-close"></i></button>
+                                </div>
+
+                                <div class="product-widget">
+                                    <div class="product-img">
+                                        <img src="./img/product02.png" alt="">
+                                    </div>
+                                    <div class="product-body">
+                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                        <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
+                                    </div>
+                                    <button class="delete"><i class="fa fa-close"></i></button>
+                                </div>
+                            </div>
+                            <div class="cart-summary">
+                                <small>3 Item(s) selected</small>
+                                <h5>SUBTOTAL: $2940.00</h5>
+                            </div>
+                            <div class="cart-btns">
+                                <a href="#">View Cart</a>
+                                <a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        #header {
+                            padding-top: 15px;
+                            padding-bottom: 15px;
+                            background-color: white;
+                        }
+                    </style> <!-- /Cart -->
+                    <!-- Menu Toogle -->
+                    <div class="menu-toggle">
+                        <a href="#">
+                            <i class="fa fa-bars"></i>
+                            <span>Menu</span>
+                        </a>
+                    </div>
+                    <!-- /Menu Toogle -->
+                </div>
+            </div>
+            <!-- /ACCOUNT -->
+        </div>
+        <!-- row -->
+    </div>
+    <!-- container -->
+</div>
+<!-- /MAIN HEADER -->
+<!-- /HEADER -->
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<div class="col-md-2">
+
+
+    <div class="list-group" id="list-tab" role="tablist">
+        <a href="#" class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" role="tab" aria-controls="home">Home</a>
+        @foreach (var item in ViewData["alcategories"] as IList<Category>)
+        {
+            <a href="~/Articles/ViewByCategory?categoryName=@item.name" class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" role="tab" aria-controls="profile">@item.name</a>
+        }
+    </div>
+    <div class="list-group" id="list-tab" role="tablist">
+        <a href="" class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" role="tab" aria-controls="home">Home</a>
+        @foreach (var item in ViewData["almarques"] as IList<Marque>)
+        {
+            <a href="~/Articles/ViewByMarque?marqueName=@item.name" class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" role="tab" aria-controls="profile">@item.name</a>
+        }
+    </div>
+</div>
+<div class="col-md-10">
+    <div class="row">
+
+        <!-- tab -->
+        <div class="products-tabs ">
+
+
+            @foreach (var item in Model)
+            {<div id="tab1" class="tab-pane active col-md-3 col-sm-12">
+                <div class="products-slick" data-nav="#slick-nav-1">
+                    <!-- product -->
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="data:image;base64,@System.Convert.ToBase64String(item.image)" alt="" />
+                            <div class="product-label">
+                                <span class="sale">-30%</span>
+                                <span class="new">NEW</span>
+                            </div>
+                        </div>
+                        <div class="product-body">
+
+                            <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.name)</a></h3>
+                            <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.Description)</a></h3>
+                            <h4 class="product-price">@Html.DisplayFor(modelItem => item.price) <del class="product-old-price">@Html.DisplayFor(modelItem => item.oldeprice)</del></h4>
+                            <div class="product-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div>
+                                <!-- <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                  <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                -->
+                                <button class="btn-success" onclick="window.location.href = '/Articles/Details/@item.ArticleID'">more details</button>
+                            </div>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.ArticleID }) |
+                                                @Html.ActionLink("Details", "Details", new { id = item.ArticleID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })*@
+
+                </div>
+            </div>
+            }
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="pagination" style="margin-left: 400px">
+    @* Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount *@  @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>

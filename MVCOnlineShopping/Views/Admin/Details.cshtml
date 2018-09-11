@@ -1,0 +1,66 @@
+﻿@model MVConlineshopping.Models.Article
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="style.css">
+<link href="http://www.professorcloud.com/styles/cloud-zoom.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js"></script>
+<script type="text/JavaScript" src="http://www.professorcloud.com/js/cloud-zoom.1.0.2.js"></script>
+<script src="~/Scripts/app.js"></script>
+<h2>Details</h2>
+
+<div>
+    <h4>Article</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+      
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            <del class="product-old-price">@Html.DisplayFor(model => model.oldeprice)</del>
+        </dt>
+        <dt>
+         @Html.DisplayNameFor(model => model.price)
+        </dt>
+        
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+           
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.image)*@
+            <div class="col-sm-3 col-md-6" style="color:blue">
+                <a href="data:image;base64,@System.Convert.ToBase64String(Model.image)" class="cloud-zoom" rel="adjustX: 10, adjustY:-4">
+                    <img src="data:image;base64,@System.Convert.ToBase64String(Model.image)" width="400" height="400" />
+               </a>
+
+            </div>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ArticleID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

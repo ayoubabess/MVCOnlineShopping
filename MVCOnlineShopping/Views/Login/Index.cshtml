@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "LoginController";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@model MVConlineshopping.Models.ClientViewModel
+
+<div>
+
+    <div class="form-horizontal">
+        <div class="col-md-2"></div>
+        <div class="login-content col-md-8">
+
+
+            <div class="login-logo">
+                <a href="index.html">
+                    <h3> Vienvenue</h3>
+                </a>
+            </div>
+
+
+
+            @if (Model.Authentifie)
+            {<div class="agileheader">
+                <h2>
+                    Vous êtes déjà authentifié avec le login :
+                    @Model.Utilisateur.Prenom
+                </h2>
+            </div>
+            @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
+            }
+            else
+            {
+                <div class="agileheader">
+                    <h2> Veuillez vous authentifier :</h2>
+                </div>
+                <div class="main-w3l">
+                    <div class="w3layouts-main">
+                        <h2>Login maintenant</h2>
+                        @using (Html.BeginForm())
+                        {
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    @Html.LabelFor(m => m.Utilisateur.Prenom)
+                                </div>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(m => m.Utilisateur.Prenom)
+                                    <small>  @Html.ValidationMessageFor(m => m.Utilisateur.Prenom)</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    @Html.LabelFor(m => m.Utilisateur.MotDePasse)
+                                </div>
+                                <div class="col-md-10">
+                                    @Html.PasswordFor(m => m.Utilisateur.MotDePasse)
+                                    <small>  @Html.ValidationMessageFor(m => m.Utilisateur.MotDePasse)</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-9">
+                                    <input type="submit" value="Se connecter" />
+
+                                    <br />
+                                    @Html.ActionLink("Créer un compte", "CreerCompte")
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-9">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> Remember Me
+                                        </label>
+                                        <label class="pull-right">
+                                            <a href="reintialiser.php">Forgotten Password?</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-9">
+                                        <p>
+                                            Cliquez <a href="">ici</a>
+                                            pour revenir à la page d accueil
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+
+                </div>
+
+            }
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    </div>
+    
+

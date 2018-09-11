@@ -1,0 +1,44 @@
+﻿@model MVConlineshopping.Models.Category
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<div class="col-md-offset-2 col-md-10">
+    <h2>Supprission</h2>
+    <h4>Category</h4>
+    <h3>voulez vous supprimmer cet enregistrement</h3>
+    <div>
+      
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Supprimer" class="btn btn-default" /> |
+               @Html.ActionLink("Retourner à la liste", "Index")
+            </div>
+        }
+    </div>
+    </div>

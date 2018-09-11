@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MVConlineshopping.Models.Commande>
+
+@{
+    ViewBag.Title = "gerercommandes";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+<div class="col-md-2"></div>
+<div class="col-md-10">
+    <h2>gerer commandes</h2>
+    @if (ViewBag.message == "success")
+    { <div class="alert alert-success" role="alert">
+       
+          commande validée avec success
+    </div>  }
+
+
+         <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.etat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateCommande)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PanierID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientID)
+            </th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var item in Model)
+    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.etat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateCommande)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PanierID)
+                    @*@foreach (var item1 in item.Panier.Articlequantites)
+
+                        {
+                            @item1.Article.name;
+
+                        }*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientID)
+                </td>
+                <td>
+                    |
+                    @Html.ActionLink("Details", "Details", new { id = item.CommandeID }) |
+                    @Html.ActionLink("Valider", "Validercommande", new { id = item.CommandeID }) |
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
